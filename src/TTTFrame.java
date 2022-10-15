@@ -4,17 +4,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TTTFrame extends JFrame{
-
+    static String player = "X";
     JPanel mainPnl, titlePnl, btnPnl, quitPnl;
+    static int moveCnt = 0;
+    static TTTTile[][] board = new TTTTile[3][3];
+    final int MOVES_FOR_WIN = 5;
+    final int MOVES_FOR_TIE = 7;
+
 
     JButton quitBtn;
-
     JLabel titleLbl;
 
-    private TTTBoard board;
 
-    public TTTFrame()
-    {
+    public TTTFrame(){ //DONE
         setTitle("TicTacToe Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -32,16 +34,117 @@ public class TTTFrame extends JFrame{
 
         add(mainPnl);
         createTitlePanel();
-        board = new TTTBoard();
+        createButtonPanel();
         createQuitPanel();
-        //createButtonLayout();
+        createButtonLayout();
 
         setVisible(true);
 
     }
 
-    private void createQuitPanel()
+    private void createButtonPanel() //DONE
     {
+        btnPnl = new JPanel();
+        btnPnl.setLayout(new GridLayout(3,3));
+
+        mainPnl.add(BorderLayout.CENTER, btnPnl);
+    }
+
+    private void createButtonLayout()
+    {
+        for( int row = 0; row < 3; row++)
+        {
+            for (int col = 0; col < 3; col++)
+            {
+                board[row][col] = new TTTTile(row, col);
+                board[row][col].setText(" ");
+                board[row][col].addActionListener(new ActionListener()
+                {
+
+                    @Override
+                    public void actionPerformed(ActionEvent e)
+                    {
+                        GameLogic.getBoard(board);
+                        JButton clicked = (JButton) e.getSource();
+                        clicked.setText(player);
+                        clicked.setEnabled(false);
+                        moveCnt++;
+                        displayResult();
+                        if (player == "X") {
+                            player = "O";
+                        } else {
+                            player = "X";
+                        }
+                    }
+                });
+                board[row][col].setFont(new Font("Comic Sans MS", Font.PLAIN, 48));
+                btnPnl.add(board[row][col]);
+            }
+
+        }
+    }
+    public void displayResult()
+    {
+        GameLogic.getMoveCount(moveCnt);
+        if(moveCnt >= MOVES_FOR_WIN)
+        {
+            if(GameLogic.isWin(player) == true)
+            {
+                System.out.println(player + "win");
+                JOptionPane pane = new JOptionPane();
+
+                int windowResult = JOptionPane.showConfirmDialog(pane, "Game Over.   " + player + "  wins!  Would you like to play again?", " ", JOptionPane.YES_NO_OPTION);
+
+                if (windowResult == JOptionPane.YES_OPTION) {
+                    clearBoard();
+                }
+
+                else{
+                    System.exit(0);
+                }
+            }
+        }
+
+        if(moveCnt >= MOVES_FOR_TIE)
+        {
+            if(GameLogic.isTie() == true) {
+                JOptionPane pane = new JOptionPane();
+                int windowResult = JOptionPane.showConfirmDialog(pane, "Tie! Would you like to play again?", " ", JOptionPane.YES_NO_OPTION);
+
+                if (windowResult == JOptionPane.YES_OPTION) {
+                    clearBoard();
+                }
+
+                else{
+                    System.exit(0);
+                }
+            }
+
+        }
+
+
+
+    }
+
+    private static void clearBoard()//DONE
+    {
+        // sets all the board elements to a space
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                board[row][col].setText(" ");
+                board[row][col].setEnabled(true);
+                moveCnt = 0;
+                player = "X";
+            }
+        }
+        if (player == "X") {
+            player = "O";
+        } else {
+            player = "X";
+        }
+    }
+
+    private void createQuitPanel(){ //DONE
         quitPnl = new JPanel();
 
         quitBtn = new JButton("QUIT");
@@ -50,9 +153,9 @@ public class TTTFrame extends JFrame{
 
         quitBtn.addActionListener((ActionEvent ae) -> System.exit(0));
         mainPnl.add(BorderLayout.SOUTH, quitPnl);
-    }
 
-    private void createTitlePanel()
+    }
+    private void createTitlePanel()//DONE
     {
         titlePnl = new JPanel();
 

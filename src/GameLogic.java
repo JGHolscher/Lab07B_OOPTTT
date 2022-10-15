@@ -1,56 +1,17 @@
 import javax.swing.*;
 
-/*public class GameResults {
+public class GameLogic {
 
-    static String player = "X";
-    static int moveCnt = 0;
-    final int MOVES_FOR_WIN = 5;
-    final int MOVES_FOR_TIE = 7;
+    static TTTTile[][] board = new TTTTile[3][3];
     private static final int ROW = 3;
     private static final int COL = 3;
-    static TicTacToeTile[][] board = new TicTacToeTile[3][3];
-
-    public void displayResult()
-    {
-        if(moveCnt >= MOVES_FOR_WIN)
-        {
-            if(isWin(player) == true)
-            {
-                System.out.println(player + "win");
-                JOptionPane pane = new JOptionPane();
-
-                int windowResult = JOptionPane.showConfirmDialog(pane, "Game Over.   " + player + "  wins!  Would you like to play again?", " ", JOptionPane.YES_NO_OPTION);
-
-                if (windowResult == JOptionPane.YES_OPTION) {
-                    clearBoard();
-                }
-
-                else{
-                    System.exit(0);
-                }
-            }
-        }
-        if(moveCnt >= MOVES_FOR_TIE)
-        {
-            if(isTie() == true) {
-                JOptionPane pane = new JOptionPane();
-                int windowResult = JOptionPane.showConfirmDialog(pane, "Tie! Would you like to play again?", " ", JOptionPane.YES_NO_OPTION);
-
-                if (windowResult == JOptionPane.YES_OPTION) {
-                    clearBoard();
-                }
-
-                else{
-                    System.exit(0);
-                }
-            }
-
-        }
+    private static int moveCnt = 0;
+    public static void getBoard(TTTTile[][] b){ board = b; }
+    public static void getMoveCount(int m){ moveCnt = m; }
 
 
 
-    }
-    private static boolean isWin(String player)
+   static boolean isWin(String player)
     {
         if(isColWin(player) || isRowWin(player) || isDiagnalWin(player))
         {
@@ -59,6 +20,7 @@ import javax.swing.*;
 
         return false;
     }
+
     private static boolean isColWin(String player)
     {
         // checks for a col win for specified player
@@ -108,7 +70,7 @@ import javax.swing.*;
         return false;
     }
 
-    private static boolean isTie()
+    static boolean isTie()
     {
         boolean xFlag = false;
         boolean oFlag = false;
@@ -205,29 +167,4 @@ import javax.swing.*;
 
 
 
-
-
-
-
-    private static void clearBoard()//DONE
-    {
-        // sets all the board elements to a space
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < 3; col++) {
-                board[row][col].setText(" ");
-                board[row][col].setEnabled(true);
-                moveCnt = 0;
-                player = "X";
-            }
-        }
-        if (player == "X") {
-            player = "O";
-        } else {
-            player = "X";
-        }
-    }
-
-
 }
-
- */
