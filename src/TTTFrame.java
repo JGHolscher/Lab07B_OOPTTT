@@ -42,7 +42,7 @@ public class TTTFrame extends JFrame{
 
     }
 
-    private void createButtonPanel() //DONE
+    public void createButtonPanel() //DONE
     {
         btnPnl = new JPanel();
         btnPnl.setLayout(new GridLayout(3,3));
@@ -50,7 +50,7 @@ public class TTTFrame extends JFrame{
         mainPnl.add(BorderLayout.CENTER, btnPnl);
     }
 
-    private void createButtonLayout()
+    public void createButtonLayout()
     {
         for( int row = 0; row < 3; row++)
         {
@@ -126,7 +126,7 @@ public class TTTFrame extends JFrame{
 
     }
 
-    private static void clearBoard()//DONE
+    public static void clearBoard()//DONE
     {
         // sets all the board elements to a space
         for (int row = 0; row < 3; row++) {
@@ -144,7 +144,7 @@ public class TTTFrame extends JFrame{
         }
     }
 
-    private void createQuitPanel(){ //DONE
+    public void createQuitPanel(){ //DONE
         quitPnl = new JPanel();
 
         quitBtn = new JButton("QUIT");
@@ -155,7 +155,7 @@ public class TTTFrame extends JFrame{
         mainPnl.add(BorderLayout.SOUTH, quitPnl);
 
     }
-    private void createTitlePanel()//DONE
+    public void createTitlePanel()//DONE
     {
         titlePnl = new JPanel();
 

@@ -2,7 +2,7 @@ import javax.swing.*;
 
 public class GameLogic {
 
-    static TTTTile[][] board = new TTTTile[3][3];
+    private static TTTTile[][] board = new TTTTile[3][3];
     private static final int ROW = 3;
     private static final int COL = 3;
     private static int moveCnt = 0;
@@ -21,7 +21,7 @@ public class GameLogic {
         return false;
     }
 
-    private static boolean isColWin(String player)
+    static boolean isColWin(String player)
     {
         // checks for a col win for specified player
         for(int col=0; col < COL; col++)
@@ -37,7 +37,7 @@ public class GameLogic {
         return false; // no col win
     }
 
-    private static boolean isRowWin(String player)
+    static boolean isRowWin(String player)
     {
         // checks for a row win for the specified player
         for(int row=0; row < ROW; row++)
@@ -52,7 +52,7 @@ public class GameLogic {
         return false; // no row win
     }
 
-    private static boolean isDiagnalWin(String player)
+    static boolean isDiagnalWin(String player)
     {
         // checks for a diagonal win for the specified player
         if(board[0][0].getText().equals(player) &&
